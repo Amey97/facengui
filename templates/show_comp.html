@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+         <thead>
+            <td>name_of_comp</td>
+            <td>reg_no</td>
+            <td>region</td>
+            <td>address_comp</td>
+            <td>ps_phone</td>
+            <td>hr_name></td>
+            <td>emp_id</td>
+            <td>hr_aadhar</td>
+            <td>hr_pan</td>
+            <td>hr_email</td>
+            <td>hr_mob_no</td>
+            <td>head_user_id</td>
+            <td>head_pass</td>
+            <td>head_pass2</td>
+         </thead>
+
+         {% for row in rows %}
+            <tr>
+               <td>{{row["name_of_comp"]}}</td>
+               <td>{{row["reg_no"]}}</td>
+               <td> {{ row["region"]}}</td>
+               <td>{{row['address_comp']}}</td>
+                <td>{{row["ps_phone"]}}</td>
+               <td>{{row["hr_name"]}}</td>
+               <td> {{ row["emp_id"]}}</td>
+               <td>{{row['hr_aadhar']}}</td>
+                <td>{{row["hr_pan"]}}</td>
+               <td>{{row["hr_email"]}}</td>
+               <td> {{ row["hr_mob_no"]}}</td>
+               <td>{{row['head_user_id']}}</td>
+                <td> {{ row["head_pass"]}}</td>
+               <td>{{row['head_pass2']}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
+      <a href = "/">Go back to home page</a>
+   </body>
+</html>

@@ -1,0 +1,12 @@
+{% extends 'layout_police.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css2.css') }}">
+ <br><br><br>
+    <h2 style="margin-left:550px; line-height:50px;">Delete Record</h2>
+    <form class="frm">
+        <input class="deletetxt" type="text" name="name" placeholder="Full Name">
+        <button class="searchbut" onclick="/police_home">Search</button>
+    </form>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'layout_police.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css2.css') }}">
+    <br><br><br>
+    <h2 style="margin-left:570px; line-height:50px;">Add Record</h2>
+    <form class="frm">
+        <input class="txtbox1" type="text" name="name" placeholder="Full Name"><br>
+        <input class="txtbox1" type="date" name="dob" placeholder="Date of Birth"><br>
+         <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <br>
+        <input class="txtbox1" type="text" name="crime" placeholder="Crime description"/><br>
+        <input class="txtbox1" type="text" name="act" placeholder="Act...."/><br>
+        <input class="txtbox1" type="text" name="punishment" placeholder="Punishment.."/><br>
+        <input class="txtbox1" type="text" name="contact" placeholder="Contact Number"/><br>
+        <input class="txtbox1" type="text" name="address" placeholder="Address"/><br>
+        <input class="txtbox1" type="text" name="c_aadhar" placeholder="Aadhar Number"/><br>
+        <button class="b1" onclick="/police_home">Submit</button>
+        <button class="b1" onclick="/police_home">cancel</button>
+    </form>
+{% endblock %}

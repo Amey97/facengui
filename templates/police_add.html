@@ -1,0 +1,47 @@
+{% extends 'layout_police.html' %}
+
+{% block content %}
+
+
+<html>
+<head>
+    <title>Facial Recognition Service</title>
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='lodash.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='immutable.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='axios.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <h1>Facial Recognition</h1>
+    <div id="train-content">
+
+        <form method="post" id="train">
+            <div class="message">
+
+            </div>
+
+            <div class="form-item">
+                <label for="input-file">Face image</label>
+                <input type="file" name="file" id="input-file" accept="image/*"/>
+            </div>
+            <div class="form-item">
+                <label>Full name</label>
+                <input id="name-field" name="name" value="" type="text" placeholder="Full name"/>
+            </div>
+            <div class="form-action">
+                <button type="submit">Begin train it</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
+
+{% endblock %}
