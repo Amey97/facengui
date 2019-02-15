@@ -9,6 +9,7 @@ import sqlite3
 
 app = Flask(__name__)
 
+#1.configuration settings
 app.config['file_allowed'] = ['image/png', 'image/jpeg']
 app.config['storage'] = path.join(getcwd(), 'storage')
 app.db = Database()
@@ -23,14 +24,54 @@ def error_handle(error_message, status=500, mimetype='application/json'):
     return Response(json.dumps({"error": {"message": error_message}}), status=status, mimetype=mimetype)
 
 
-#company_db
+@app.route('/')
+def index():
+    return render_template('home.html')
 
 
-@app.route('/', methods=['POST', 'GET'])
-def home():
+#2 police_db
+@app.route('/addrec', methods=['POST', 'GET'])
+def addrec():
+    if request.method == 'POST':
+        name_of_police_stn = request.form['name_of_police_stn']
+        police_stn_no = request.form['police_stn_no']
+        region1 = request.form['region1']
+        address_ps = request.form['address_ps']
+        ps_phone1 = request.form['ps_phone1']
+        head_officer = request.form['head_officer']
+        head_id = request.form['head_id']
+        head_aadhar = request.form['head_aadhar']
+        head_pan = request.form['head_pan']
+        head_email = request.form['head_email']
+        head_mob_no = request.form['head_mob_no']
+        head_user_id1 = request.form['head_user_id1']
+        head_pass1 = request.form['head_pass1']
+        head_pass21 = request.form['head_pass21']
+        app.db.insertUser(name_of_police_stn, police_stn_no, region1, address_ps, ps_phone1, head_officer, head_id, head_aadhar, head_pan, head_email, head_mob_no, head_user_id1, head_pass1, head_pass21)
+
+        return render_template('home.html')
+    else:
+        return render_template('home.html')
+
+
+@app.route('/admin_user2det')
+def show():
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+
+    cur = con.cursor()
+    cur.execute("select * from police_reg")
+
+    rows = cur.fetchall();
+    return render_template("admin_user2det.html", rows=rows)
+
+#3,com
+
+@app.route('/addrec1', methods=['POST', 'GET'])
+def addrec1():
     if request.method == 'POST':
         name_of_comp = request.form['name_of_comp']
-        reg_no = request.form['reg_no']
+        reg_no = request.form['unique_reg_no']
         region= request.form['region']
         address_comp = request.form['address_comp']
         ps_phone = request.form['ps_phone']
@@ -43,8 +84,8 @@ def home():
         head_user_id = request.form['head_user_id']
         head_pass = request.form['head_pass']
         head_pass2 = request.form['head_pass2']
-        app.db.insertUser(name_of_comp, reg_no, region, address_comp, ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2)
-
+        app.db.insertUser1('INSERT INTO company_reg (name_of_comp, reg_no, region, address_comp,ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',name_of_comp, reg_no, region, address_comp, ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2)
+        #app.db.insertUser(name_of_comp, reg_no, region, address_comp, ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2)
         return render_template('home.html')
     else:
         return render_template('home.html')
@@ -62,6 +103,8 @@ def list():
     return render_template("admin_user3det.html", rows=rows)
 
 
+
+#4.face wala db
 def get_user_by_id(user_id):
     user = {}
     results = app.db.select(
@@ -98,11 +141,9 @@ def delete_user_by_id(user_id):
     # also delete all faces with user id
     app.db.delete('DELETE FROM faces WHERE faces.user_id = ?', [user_id])
 
-#   Route for Hompage
-#@app.route('/', methods=['GET'])
-#def page_home():
 
-    #return render_template('home.html')
+#5. Actual working part
+
 
 @app.route('/api', methods=['GET'])
 def homepage():
@@ -172,7 +213,6 @@ def train():
         print("Request is contain image")
     return success_handle(output)
 
-
 # route for user profile
 @app.route('/api/users/<int:user_id>', methods=['GET', 'DELETE'])
 def user_profile(user_id):
@@ -185,7 +225,6 @@ def user_profile(user_id):
     if request.method == 'DELETE':
         delete_user_by_id(user_id)
         return success_handle(json.dumps({"deleted": True}))
-
 
 # router for recognize a unknown face
 @app.route('/api/recognize', methods=['POST'])
@@ -214,15 +253,14 @@ def recognize():
 
                 return error_handle("Sorry we can not found any people matched with your face image, try another image")
 
-
-
-
-
-
-# default home page
 @app.route('/logout')
 def logout():
-    return render_template('police_add.html')
+    return render_template('home.html')
+
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 # admin window
 @app.route('/admin_home')
@@ -257,8 +295,6 @@ def police_update():
 def company_home():
     return render_template('company_home.html')
 
-
-
 # registration details
 @app.route('/reg2')
 def reg2():
@@ -266,29 +302,6 @@ def reg2():
 @app.route('/reg1')
 def reg1():
     return render_template('reg1.html')
-
-#@app.route('/home')
-#def home():
-  #  return render_template('home.html')
-
-#if __name__=="__main__":
-    #app.run()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

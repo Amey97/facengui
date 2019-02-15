@@ -1,27 +1,104 @@
 <!DOCTYPE html>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='homecss.css') }}">
-    <div style="background-color:#87CEFA; height:140px; padding:0%;  width:100%; position:absolute;">
-		<h1 style="text-shadow:5px 5px #C0C0C0;line-height:70px; text-align:center; color:black; text-decoration:bold; font-size:30px">Criminal Face Detection and Data Extraction</h1>
-		<h5 style="text-align:center; color:black; font-size:15px; line-height:0px">-----Developed by Rekha, Amey & Dipali-----</h5>
-	</div>
-    <br>
-    <div style="box-sizing:border-box; font-weight: bold; height:600px; margin-left:270px; margin-right:230px; margin-top:130px;">
-        <div style="margin-left:290px; margin-top:40px; height:200px; width:200px; border:2px solid black;">
-            <p style="text-align:center; margin-top:100px;">(LOGO here)</p>
-        </div>
-        <h3 style="text-align:center; margin-top:20px; text-decoration:underline;">LOGIN/SIGN-UP</h3>
-            <form>
-                <input style="height:30px; margin-left:150px; width:450px;z-index: 1;" type="text" name="" placeholder="username"></br>
-                <input style="height:30px;margin-left:150px; margin-top:10px; width:450px;z-index: 1;" type="password" name="" placeholder="password"></br>
-                <input style="margin-left:150px; margin-top:10px; height:45px;width:460px;text-align:center;text-decoration:bold; border-radius:10px;font-size:20px;background-color:#157DEC;color:black;padding:0%;"
-                       type="submit" name="submit" value="LOGIN" onclick="/notification.html"></br>
-                <a href="" style="margin-left:150px;position:absolute; margin-top:10px; ;font-size:15px; color:black;">Forgot Password</a><br><br>
-                <br><li style="float:right; margin-right:70px;"><a href="/company_home">Company Home</a></li>
-                <li style="float:right; margin-right:70px;"><a href="/police_home">Police Home</a></li>
-                <li style="float:right; margin-right:70px;"><a href="/admin_home">Admin Home</a></li>
-                <li style="float:right; margin-right:70px;"><a href="/reg1">Sign as police</a></li>
-                <li style="float:right; margin-right:70px;"><a href="/reg2">Sign as a company</a></li>
+<title>my flask website</title>
+<style>
+body{
+    margin:0;
+    padding:0;
+    background-image:url(static/Plain-Light-Backgrounds.jpg);
+    background-color:#e6e6ff;
+    background-size:cover;
+    font-family:"Times New Roman", Times, serif;
+}
+.form_area{
+    margin-top:50px;
+    margin-bottom:50px;
+    margin-left:400px;
+    width:500px;
+    height:600px;
+    box-sizing:border-box;
+    background:rgba(0,0,0,0.3);
+    padding:30px;
+}
+h3{
+    margin:0;
+    padding:0 0 20px;
+    font-weight:bold;
+    color:#ffffff;
+    text-align:center;
+}
+.form_area input{
+    margin-bottom:20px;
+    width:100%;
+}
+.form_area input[type=text],
+.form_area input[type=password]{
+    border:none;
+    border-bottom:2px solid #ffffff;
+    background-color:transparent;
+    border-radius:7px;
+    outline:none;
+    height:40px;
+    color:#ffffff;
+    display:20px;
+}
+::placeholder
+{
+    color:#ffffff;
+    font-size:22px;
+}
+.form_area input[type=submit],
+input[type=button]
+{
+    border:none;
+    height:40px;
+    outline:none;
+    color:#ffffff;
+    font-size:15px;
+    background-color:#000033;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:20px;
+    text-decoration:none;
+}
+.form_area input[type=submit]:hover{
+    background-color:#99bbff;
+    color:black;
+}
+.form_area a{
+    color:#ffffff;
+    font-size:16px;
+    font-weight:bold;
+    text-decoration:none;
+}
+.form_area p{
+    margin:0;
+    padding:0;
+    color:#ffffff;
+    font-size:17px;
+    text-align:center;
+}
+.form_area img
+{
+    margin-left:165px;
+    height:100px;
+    width:100px;
+    padding:10px;
+}
+</style>
 
+    <div class="form_area">
+        <img src="static/IMG_20181110_180127686(1).jpg"><br><br>
+        <h3>LOGIN</h3>
+        <form action="https://www.google.com">
+            <input type="text" name="" placeholder="username"></br>
+            <input type="password" name="" placeholder="password"></br>
+            <input type="submit" name="submit" value="LOGIN" onclick="/notification.html"></br>
+            <a href="">Forgot Password</a><br><br><br>
             </form>
+            <a href="/reg1"><input style="width:215px" type="button" value="SIGN UP as POLICE"></a>
+            <a href="/reg2"><input style="width:215px" type="button" value="SIGN UP as COMPANY"></a>
+            <a href="/admin_home"><input style="width:215px" type="button" value="ADMIN"></a>
+            <a href="/company_home"><input style="width:215px" type="button" value="CRIMINAL"></a>
+            <a href="/police_home"><input style="width:215px" type="button" value="POLICE"></a></br>
     </div>

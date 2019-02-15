@@ -1,23 +1,22 @@
+{% extends 'layout.html' %}
 
-<!doctype html>
-<html>
-   <body>
+{% block content %}
       <table border = 1>
          <thead>
-            <td>name_of_comp</td>
-            <td>reg_no</td>
-            <td>region</td>
-            <td>address_comp</td>
-            <td>ps_phone</td>
-            <td>hr_name></td>
-            <td>emp_id</td>
-            <td>hr_aadhar</td>
-            <td>hr_pan</td>
-            <td>hr_email</td>
-            <td>hr_mob_no</td>
-            <td>head_user_id</td>
-            <td>head_pass</td>
-            <td>head_pass2</td>
+            <th>Company Name</th>
+            <th>Registration No.</th>
+            <th>Region</th>
+            <th>Address</th>
+            <th>Company Contact</th>
+            <th>HR Name</th>
+            <th>Emp Id</th>
+            <th>Aadhar No.</th>
+            <th>Pan No.</th>
+            <th>E-mail Id</th>
+            <th>HR Contact</th>
+            <th>User Id</th>
+            <th>Password</th>
+
          </thead>
 
          {% for row in rows %}
@@ -35,12 +34,11 @@
                <td> {{ row["hr_mob_no"]}}</td>
                <td>{{row['head_user_id']}}</td>
                 <td> {{ row["head_pass"]}}</td>
-               <td>{{row['head_pass2']}}</td>
+
             </tr>
          {% endfor %}
       </table>
 
       <a href = "/home">Go back to home page</a>
-   </body>
-</html>
 
+{% endblock %}
