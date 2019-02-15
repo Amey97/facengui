@@ -1,8 +1,8 @@
-"""setup for the dlib project
+"""setup for the dlib face
  Copyright (C) 2015  Ehsan Azar (dashesy@linux.com)
  License: Boost Software License   See LICENSE.txt for the full license.
 
-This file basically just uses CMake to compile the dlib python bindings project
+This file basically just uses CMake to compile the dlib python bindings face
 located in the tools/python folder and then puts the outputs into standard
 python packages.
 
