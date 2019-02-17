@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css2.css') }}">
  <br><br><br>
     <h2 style="margin-left:550px; line-height:50px;">Delete Record</h2>
-    <form class="frm">
-        <input class="deletetxt" type="text" name="name" placeholder="Full Name">
-        <button class="searchbut" onclick="/police_home">Search</button>
+    <form class="frm" action="{{ url_for('delete_user_by_id')}}" method="post">
+        <input class="deletetxt" type="text" name="user_id" placeholder="user_id">
+        <button class="searchbut" onclick="/police_home" type="submit" id="submit">delete</button>
     </form>
 {% endblock %}
 

@@ -1,0 +1,64 @@
+.d1{
+    width:100%;
+    height:160px;
+    background-color:#99bbff;
+    color:black;
+    padding:0%;
+    margin:0%;
+}
+body{
+}
+h3{
+	text-align:center;
+	font-weight:bold;
+	font-size:25px;
+    color:#000033;
+}
+h1{
+    text-align:center;
+  	line-height:110px;
+    font-size:30px;
+    text-decoration:bold;
+}
+h5
+{
+      text-align:center;
+}
+.form_area{
+	margin-left:350px;
+}
+.form_area input[type=text],
+.form_area input[type=password],
+.form_area select
+{
+	margin-left:50px;
+    height:40px;
+    width:450px;
+    color:#000033;
+    border:black;
+    border-bottom:1px solid #002266;
+    border-radius:5px;
+}
+.form_area fieldset{
+	width:550px;
+}
+.form_area legend{
+	font-size:20px;
+	font-weight:bold;
+	color:#000033;
+}
+.form_area button
+{
+	border:none;
+    height:40px;
+    outline:none;
+    color:#ffffff;
+    font-size:20px;
+    background-color:#000033;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:20px;
+    text-decoration:none;
+    margin-left:70px;
+    width:180px;
+}

@@ -135,12 +135,16 @@ def get_user_by_id(user_id):
         return user
     return None
 
-
-def delete_user_by_id(user_id):
-    app.db.delete('DELETE FROM users WHERE users.id = ?', [user_id])
+@app.route('/delete_user_by_id', methods=['POST', 'GET'])
+def delete_user_by_id():
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        app.db.delete('DELETE FROM users WHERE users.id = ?', [user_id])
     # also delete all faces with user id
-    app.db.delete('DELETE FROM faces WHERE faces.user_id = ?', [user_id])
-
+        app.db.delete('DELETE FROM faces WHERE faces.user_id = ?', [user_id])
+        return render_template('layout_police.html')
+    else:
+        return render_template('layout_police.html')
 
 #5. Actual working part
 
