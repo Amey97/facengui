@@ -5,7 +5,10 @@ import time
 from db import Database
 from face import Face
 import db as dbHandler
+from md5 import md5_to_hex
+from md5 import md5
 import sqlite3
+import math
 
 app = Flask(__name__)
 
@@ -23,11 +26,41 @@ def success_handle(output, status=200, mimetype='application/json'):
 def error_handle(error_message, status=500, mimetype='application/json'):
     return Response(json.dumps({"error": {"message": error_message}}), status=status, mimetype=mimetype)
 
-
+#default page
 @app.route('/')
 def index():
     return render_template('home.html')
 
+#login page
+@app.route('/login', methods=['POST','GET'])
+def login():
+   if request.method == 'POST':
+      username = request.form['username']
+      password = request.form['password']
+      print (username)
+      #password.encode("ascii")
+      #demo = [input(password).encode("ascii")]
+      #print (demo)
+      #for message in demo:
+      #  result = md5_to_hex(md5(message))
+      #print (password)
+      #print (result)
+      con = sqlite3.connect("database.db")
+      con.row_factory = sqlite3.Row
+      cur = con.cursor()
+      cur.execute("SELECT * from login WHERE username=? AND password=?", (username, password))
+      results = cur.fetchall()
+      for row in results:
+         type = row[2]
+      if type == "admin":
+         return admin_home()
+      elif type == "police":
+          return police_home()
+      elif type == "company":
+         return company_home()
+   else:
+      print("error")
+      return render_template('home.html')
 
 #2 police_db
 @app.route('/addrec', methods=['POST', 'GET'])
@@ -102,7 +135,28 @@ def list():
     rows = cur.fetchall();
     return render_template("admin_user3det.html", rows=rows)
 
+@app.route('/admin_home')
+def admin_home():
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("select * from company_reg where status='false' ")
+    row1 = cur.fetchall()
+    cur.execute("select * from police_reg where status='false' ")
+    row2 = cur.fetchall()
+    return render_template("admin_home.html", row1=row1, row2=row2)
 
+@app.route('/police_home')
+def police_home():
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+
+    cur = con.cursor()
+    cur.execute("select * from users ORDER BY id DESC")
+
+    rows = cur.fetchall();
+
+    return render_template("police_home.html", rows=rows)
 
 #4.face wala db
 def get_user_by_id(user_id):
@@ -248,6 +302,7 @@ def recognize():
             file.save(file_path)
 
             user_id = app.face.recognize(filename)
+
             if user_id:
                 user = get_user_by_id(user_id)
                 message = {"message": "Hey we found {0} matched with your face image".format(user["name"]),
@@ -267,23 +322,21 @@ def home():
     return render_template('home.html')
 
 # admin window
-@app.route('/admin_home')
-def admin_home():
-    return render_template('admin_home.html')
+#@app.route('/admin_home')
+#def admin_home():
+#    return render_template('admin_home.html')
 @app.route('/admin_user2det')
 def admin_user2det():
     return render_template('admin_user2det.html')
 @app.route('/admin_user3det')
 def admin_user3det():
     return render_template('admin_user3det.html')
+
 @app.route('/notification')
 def notification():
-    return render_template('notification.html')
+   return render_template('notification.html')
 
 # police user window
-@app.route('/police_home')
-def police_home():
-    return render_template('police_home.html')
 @app.route('/police_add')
 def police_add():
     return render_template('police_add.html')
@@ -307,7 +360,178 @@ def reg2():
 def reg1():
     return render_template('reg1.html')
 
+#police delete
+@app.route('/pro', methods=['POST','GET'])
+def pro():
+    if request.method == 'POST':
+        id = request.form['id']
+        print (id)
+        con = sqlite3.connect("database.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        print ("conn")
+        cur.execute("SELECT * from users WHERE id=?", [id])
+        print ("query")
+        results = cur.fetchall()
+        return render_template('police_delete.html', rows=results)
+    else:
+        print("error")
+        return render_template('police_home.html')
 
+@app.route('/delete/<id>')
+def base1(id):
+    print(id)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("DELETE from users WHERE id=?", [id])
+    con.commit()
+    return police_home()
+
+#update police
+@app.route('/pro1', methods=['POST','GET'])
+def pro1():
+    if request.method == 'POST':
+        id = request.form['id']
+        con = sqlite3.connect("database.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * from users WHERE id=?", [id])
+        results = cur.fetchall()
+        return render_template('police_update.html', rows=results)
+    else:
+        print("error")
+        return render_template('police_home.html')
+
+@app.route('/update1/<id>')
+def update1(id):
+    print(id)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * from users WHERE id=?", [id])
+    results = cur.fetchall()
+    con.commit()
+    print("done")
+    return render_template('update.html', rows=results)
+
+#update form
+@app.route('/upd', methods=['POST','GET'])
+def upd():
+    print ("...")
+    if request.method == 'POST':
+        print ("a")
+        con = sqlite3.connect("database.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        id = request.form['id']
+        print (id)
+        name = request.form['name']
+        dob = request.form['dob']
+        print (name)
+        gender = request.form['gender']
+        contact = request.form['contact']
+        address = request.form['address']
+        aadhar = request.form['aadhar']
+        crime = request.form['crime']
+        act = request.form['act']
+        print ("b")
+        cur.execute("UPDATE users set name=?, dob=?  WHERE id=?", [name, dob, id])
+        print ("k")
+        con.commit()
+        return police_home()
+    else:
+        return police_home()
+
+
+#accept reject logic for company user
+@app.route('/accept/<head_user_id>', methods=['POST','GET'])
+def accept(head_user_id):
+    print (head_user_id)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("UPDATE company_reg set status='true' where head_user_id=?", [head_user_id])
+    print ("up")
+    #con.commit()
+    #cur = con.cursor()
+    cur.execute("SELECT * from company_reg where head_user_id=?", [head_user_id])
+    results = cur.fetchall()
+    print ("one")
+    for row in results:
+        password = row[12]
+        type = row[15]
+    #con.commit()
+    print (type)
+    print (password)
+    #cur = con.cursor()
+    cur.execute("INSERT INTO login (username,password,type) values(?,?,?)", [head_user_id, password, type])
+    con.commit()
+    return admin_home()
+
+
+@app.route('/reject/<head_user_id>', methods=['POST', 'GET'])
+def reject(head_user_id):
+    print(head_user_id)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("DELETE from company_reg WHERE head_user_id=?", [head_user_id])
+    print ("delete succ")
+    con.commit()
+    return admin_home()
+
+
+#accept reject logic for police user
+@app.route('/acc/<head_user_id1>', methods=['POST', 'GET'])
+def paccept(head_user_id1):
+    print (head_user_id1)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("UPDATE police_reg set status='true' where head_user_id1=?", [head_user_id1])
+    print ("up")
+    #con.commit()
+    #cur = con.cursor()
+    cur.execute("SELECT * from police_reg where head_user_id1=?", [head_user_id1])
+    results = cur.fetchall()
+    print ("one")
+    for row in results:
+        password = row[12]
+        type = row[14]
+    #con.commit()
+    print (type)
+    print (password)
+    #cur = con.cursor()
+    cur.execute("INSERT INTO login (username,password,type) values(?,?,?)", [head_user_id1, password, type])
+    con.commit()
+    return admin_home()
+
+@app.route('/rej/<head_user_id1>', methods=['POST', 'GET'])
+def pr(head_user_id1):
+    print(head_user_id1)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("DELETE from police_reg WHERE head_user_id1=?", [head_user_id1])
+    print ("delete succ")
+    con.commit()
+    return admin_home()
+
+#criminal profile
+@app.route('/view/<id>', methods=['POST', 'GET'])
+def view(id):
+    print (id)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * from users WHERE id=?", [id])
+    results = cur.fetchall()
+    con.commit()
+    return render_template('criminal_profile.html', rows=results)
+
+#@app.route('/cripro', methods=['POST', 'GET'])
+#def cripro():
 
 # Run the app
 app.run()

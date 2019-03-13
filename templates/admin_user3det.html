@@ -1,22 +1,67 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-      <table border = 1>
+<style>
+    p{
+        text-align:center;
+        font-size:25px;
+        color:#002266;
+    }
+    table{
+      border-collapse: collapse;
+      margin-left:15px;
+      margin-right:15px;
+   }
+    tr, td {
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        padding: 8px;
+        width:130px;
+
+    }
+    td{
+        height:30px;
+
+    }
+    th{
+        width:130px;
+        background-color: #002266;
+        color: white;
+        height:35px;
+        text-decoration:bold;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        height:35px;
+        line-height:35px;
+        border-radius:5px;
+        text-align:center;
+        background-color: #002266;
+    }
+</style>
+      <br><br>
+      <p>Company user details</p>
+      <br><br>
+      <table>
          <thead>
-            <th>Company Name</th>
-            <th>Registration No.</th>
+            <th>Name</th>
+            <th>Reg.No.</th>
             <th>Region</th>
             <th>Address</th>
-            <th>Company Contact</th>
-            <th>HR Name</th>
-            <th>Emp Id</th>
-            <th>Aadhar No.</th>
-            <th>Pan No.</th>
-            <th>E-mail Id</th>
+            <th>Contact</th>
+            <th>HRName</th>
+            <th>EmpId</th>
+            <th>AadharNo.</th>
+            <th>PanNo.</th>
+            <th>E-mail</th>
             <th>HR Contact</th>
-            <th>User Id</th>
+            <th>UserId</th>
             <th>Password</th>
-
          </thead>
 
          {% for row in rows %}
@@ -38,7 +83,5 @@
             </tr>
          {% endfor %}
       </table>
-
-      <a href = "/home">Go back to home page</a>
-
+      <br><br><br><br>
 {% endblock %}

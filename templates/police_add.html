@@ -6,28 +6,25 @@
 <html>
 <head>
     <title>Facial Recognition Service</title>
-
-
     <script type="text/javascript" src="{{ url_for('static', filename='lodash.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='immutable.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='axios.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
 </head>
 <body>
 
-
 <div class="container">
-    <br><br><br><br><br>
-    <div id="train-content">
-
-        <form method="post" id="train">
+    <br><br>
+    <form method="post" id="train">
             <div class="message">
 
             </div>
-
+            <p class="description">Pre-training our service. Upload an image contain the face and give it full name for
+                recognize later</p>
             <div class="form-item">
-               <label for="input-file">Face image</label>
+                <label for="input-file">Face image</label>
                 <input type="file" name="file" id="input-file" accept="image/*"/>
             </div>
             <div class="form-item">
@@ -38,8 +35,8 @@
                 <button type="submit">Begin train it</button>
             </div>
         </form>
-    </div>
 
+    <br><br><br><br><br>
 </div>
 </body>
 </html>

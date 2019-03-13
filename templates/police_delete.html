@@ -1,12 +1,165 @@
 {% extends 'layout_police.html' %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css2.css') }}">
- <br><br><br>
-    <h2 style="margin-left:550px; line-height:50px;">Delete Record</h2>
-    <form class="frm" action="{{ url_for('delete_user_by_id')}}" method="post">
-        <input class="deletetxt" type="text" name="user_id" placeholder="user_id">
-        <button class="searchbut" onclick="/police_home" type="submit" id="submit">delete</button>
-    </form>
-{% endblock %}
+<head>
+<style>
+.form_area{
+            margin-left:350px;
+            width:600px;
+        }
+        .form_area input[type=file]{
+            margin-left:50px;
+            height:30px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area input[type=text],
+        .form_area input[type=date],
+        .form_area input[type=password],
+        .form_area select{
+            margin-left:50px;
+            height:30px;
+            width:250px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area label{
+            margin-left:50px;
+            height:50px;
+            width:50px;
+            color:#000033;
+        }
+        .form_area fieldset{
+	        width:550px;
+        }
+        .form_area legend{
+	        font-size:20px;
+	        font-weight:bold;
+	        color:#000033;
+        }
+        .form_area button
+        {
+	        border:none;
+            height:40px;
+            outline:none;
+            color:#ffffff;
+            font-size:18px;
+            background-color:#000033;
+            cursor:pointer;
+            font-weight:bold;
+            border-radius:20px;
+            text-decoration:none;
+            margin-left:20px;
+            width:180px;
+        }
+    h2{
+	    text-align:center;
+	    text-decoration:underline;
+	}
+    p{
+        text-align:center;
+        font-size:25px;
+        color:#002266;
+    }
+    table{
+      border-collapse: collapse;
+      margin-left:15px;
+      margin-right:15px;
+   }
+    tr, td {
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        padding: 8px;
+        width:120px;
 
+    }
+    td{
+        height:30px;
+
+    }
+    th{
+        width:120px;
+        background-color: #002266;
+        color: white;
+        height:35px;
+        text-decoration:bold;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        height:35px;
+        line-height:35px;
+        border-radius:5px;
+        text-align:center;
+        background-color: #002266;
+    }table{
+      border-collapse: collapse;
+      margin-left:15px;
+      margin-right:15px;
+   }
+    tr, td {
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        padding: 8px;
+        width:120px;
+
+    }
+    td{
+        height:30px;
+
+    }
+    th{
+        width:120px;
+        background-color: #002266;
+        color: white;
+        height:35px;
+        text-decoration:bold;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    a{
+        display:block;
+        color:white;
+        text-decoration:none;
+        height:35px;
+        line-height:35px;
+        border-radius:5px;
+        text-align:center;
+        background-color: #002266;
+    }
+</style></head>
+<body>
+ <br><br><br>
+    <h2>Delete Record</h2>
+    <form class="form_area" action="{{ url_for('pro')}}" method="post" ><br><br>
+        <input type="text" name="id" placeholder="id">
+        <button type="submit" id="submit">search</button>
+    </form>
+    <table>
+        {% for row in rows %}
+            <tr>
+               <td>{{row["id"]}}</td>
+               <td>{{row["name"]}}</td>
+               <td> {{ row["dob"]}}</td>
+               <td>{{row['gender']}}</td>
+                <td>{{row["contact"]}}</td>
+               <td>{{row["address"]}}</td>
+               <td> {{ row["aadhar"]}}</td>
+               <td>{{row['crime']}}</td>
+                <td>{{row["act"]}}</td>
+                <td><a href="/delete/{{ row['id'] }}">delete</a></td>
+            </tr>
+         {% endfor%}
+    </table>
+{% endblock %}
+</body>

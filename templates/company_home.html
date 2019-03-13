@@ -1,14 +1,8 @@
 {% extends 'layout_company.html' %}
 
 {% block content %}
-
-
-
 <html>
 <head>
-
-
-
     <script type="text/javascript" src="{{ url_for('static', filename='lodash.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='immutable.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='axios.js') }}"></script>
@@ -16,15 +10,10 @@
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 </head>
 <body>
-
-
-
 <div style="margin-left:40px; margin-top:100px;" class="container" >
 
         <form method="post" id="recognize">
-            <div class="message">
 
-            </div>
             <p style="font-size:30px;" class="description">Upload Image</p><br>
             <div class="form-item">
 
@@ -35,8 +24,10 @@
                 <button type="submit" style="font-size:30px;">Recognize it</button>
             </div>
         </form>
+        <br><br>
+        <div class="message">
 
-
+        </div>
 </div>
 </body>
 </html>

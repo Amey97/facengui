@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form{
+            margin-left:400px;
+            font-size:15px;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('upd')}}" method="post">
+        {% for row in rows %}
+        ID: <input type="text" value="{{row['id']}}" name="id">
+        Name: <input type="text" value="{{row['name']}}" name="name">
+        Date of Birth: <input type="text" value="{{row['dob']}}" name="dob">
+        Gender: <input type="text" value="{{row['gender']}}" name="gender">
+        Contact Number: <input type="text" value="{{row['contact']}}" name="contact">
+        Address: <input type="text" value="{{row['address']}}" name="address">
+        Aadhar Number: <input type="text" value="{{row['aadhar']}}" name="aadhar">
+        Crime: <input type="text" value="{{row['crime']}}" name="crime">
+        Act: <input type="text" value="{{row['act']}}" name="act">
+        <button type="submit" >Update</button>
+        {% endfor %}
+    </form>
+</body>
+</html>

@@ -3,7 +3,6 @@ from os import path, getcwd
 
 db = path.join(getcwd(), 'database.db')
 
-
 class Database:
 
     def __init__(self):
