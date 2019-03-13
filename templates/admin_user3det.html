@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+      <table border = 1>
+         <thead>
+            <th>Company Name</th>
+            <th>Registration No.</th>
+            <th>Region</th>
+            <th>Address</th>
+            <th>Company Contact</th>
+            <th>HR Name</th>
+            <th>Emp Id</th>
+            <th>Aadhar No.</th>
+            <th>Pan No.</th>
+            <th>E-mail Id</th>
+            <th>HR Contact</th>
+            <th>User Id</th>
+            <th>Password</th>
+
+         </thead>
+
+         {% for row in rows %}
+            <tr>
+               <td>{{row["name_of_comp"]}}</td>
+               <td>{{row["reg_no"]}}</td>
+               <td> {{ row["region"]}}</td>
+               <td>{{row['address_comp']}}</td>
+                <td>{{row["ps_phone"]}}</td>
+               <td>{{row["hr_name"]}}</td>
+               <td> {{ row["emp_id"]}}</td>
+               <td>{{row['hr_aadhar']}}</td>
+                <td>{{row["hr_pan"]}}</td>
+               <td>{{row["hr_email"]}}</td>
+               <td> {{ row["hr_mob_no"]}}</td>
+               <td>{{row['head_user_id']}}</td>
+                <td> {{ row["head_pass"]}}</td>
+
+            </tr>
+         {% endfor %}
+      </table>
+
+      <a href = "/home">Go back to home page</a>
+
+{% endblock %}

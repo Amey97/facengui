@@ -1,0 +1,36 @@
+*{
+    margin:0;
+}
+.c1
+{
+	background-color:#99bbff; height:140px; padding:0%;  width:100%;
+}
+.c2
+{
+	background-color:#002266; height:60px; padding:0%; width:100%;
+}
+ul.notibar
+{
+    margin-left:70px;
+	display:block;
+}
+ul.notibar li
+{
+    display:inline-block;
+    width:200px;
+    text-align:center;
+}
+ul.notibar li a
+{
+	display:block;
+	color:white;
+	text-decoration:none;
+}
+h1
+{
+	line-height:70px; text-align:center; color:black; text-decoration:bold; font-size:30px
+}
+h5
+{
+	text-align:center; color:black; font-size:15px; line-height:0px
+}

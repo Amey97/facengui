@@ -1,0 +1,44 @@
+{% extends 'layout_company.html' %}
+
+{% block content %}
+
+
+
+<html>
+<head>
+
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='lodash.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='immutable.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='axios.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+
+
+
+<div style="margin-left:40px; margin-top:100px;" class="container" >
+
+        <form method="post" id="recognize">
+            <div class="message">
+
+            </div>
+            <p style="font-size:30px;" class="description">Upload Image</p><br>
+            <div class="form-item">
+
+                <input type="file" name="file" id="recognize-input-file" accept="image/*"/>
+            </div>
+
+            <div class="form-action">
+                <button type="submit" style="font-size:30px;">Recognize it</button>
+            </div>
+        </form>
+
+
+</div>
+</body>
+</html>
+
+{% endblock %}

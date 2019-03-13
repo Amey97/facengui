@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+      <table border= 1>
+         <thead>
+            <th>Station Name</th>
+            <th>Number</th>
+            <th>Region</th>
+            <th>Address</th>
+            <th>Contact No.</th>
+            <th>Head Officer</th>
+            <th>Head Id</th>
+            <th>Head Aadhar No.</th>
+            <th>Head Pan No.</th>
+            <th>Head Email Id</th>
+            <th>Head Contact No.</th>
+            <th>User id</th>
+            <th>Password</th>
+
+         </thead>
+
+         {% for row in rows %}
+            <tr>
+               <td>{{row["name_of_police_stn"]}}</td>
+               <td>{{row["police_stn_no"]}}</td>
+               <td> {{ row["region1"]}}</td>
+               <td>{{row['address_ps']}}</td>
+                <td>{{row["ps_phone1"]}}</td>
+               <td>{{row["head_officer"]}}</td>
+               <td> {{ row["head_id"]}}</td>
+               <td>{{row['head_aadhar']}}</td>
+                <td>{{row["head_pan"]}}</td>
+               <td>{{row["head_email"]}}</td>
+               <td> {{ row["head_mob_no"]}}</td>
+               <td>{{row['head_user_id1']}}</td>
+                <td> {{ row["head_pass1"]}}</td>
+
+            </tr>
+         {% endfor %}
+      </table>
+
+      <a href = "/">Go back to home page</a>
+
+
+{% endblock %}

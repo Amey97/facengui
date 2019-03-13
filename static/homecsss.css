@@ -1,0 +1,65 @@
+*{
+    margin:0;
+}
+body {
+
+    background-size:cover;
+    background-image:url(Criminal-History-600x330.jpg);
+    background-repeat:no-repeat;
+}
+#txtb
+{
+    margin-left:250px;margin-top:30px;height:50px; width:400px;z-index: 1;  left: 448px; top: 151px;position: absolute;
+}
+h1
+{
+    margin-left:120px;
+    margin-top:50px;
+    z-index: 1;
+    left: 372px;
+    top: 58px;
+    position: absolute;
+    height: 36px;
+    width: 879px;
+}
+#log1
+{
+    margin-left:50px;
+    margin-top:30px;
+    height:35px;
+    width:400px;
+    text-align:;
+    border-radius:10px;
+    font-size:15px;
+    background-color:#157DEC;
+    color:white;
+    padding:0%;
+}
+a
+{
+    margin-left:50px;
+    margin-top:20px;
+
+}
+
+p
+{
+     margin-top:10px;
+     margin-left:50px;
+}
+#reg
+{
+    margin-left:50px;height:30px;width:200px;text-align:;border-radius:10px;
+}
+.c1
+{
+	background-color:#66CC66; height:140px; padding:0%;  width:100%; position:absolute;
+}
+h1
+{
+	line-height:70px; text-align:center; color:black; text-decoration:bold; font-size:30px
+}
+h5
+{
+	text-align:center; color:black; font-size:15px; line-height:0px
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<title>my flask website</title>
+<style>
+body{
+    margin:0;
+    padding:0;
+    background-image:url(static/Plain-Light-Backgrounds.jpg);
+    background-color:#e6e6ff;
+    background-size:cover;
+    font-family:"Times New Roman", Times, serif;
+}
+.form_area{
+    margin-top:50px;
+    margin-bottom:50px;
+    margin-left:400px;
+    width:500px;
+    height:600px;
+    box-sizing:border-box;
+    background:rgba(0,0,0,0.3);
+    padding:30px;
+}
+h3{
+    margin:0;
+    padding:0 0 20px;
+    font-weight:bold;
+    color:#ffffff;
+    text-align:center;
+}
+.form_area input{
+    margin-bottom:20px;
+    width:100%;
+}
+.form_area input[type=text],
+.form_area input[type=password]{
+    border:none;
+    border-bottom:2px solid #ffffff;
+    background-color:transparent;
+    border-radius:7px;
+    outline:none;
+    height:40px;
+    color:#ffffff;
+    display:20px;
+}
+::placeholder
+{
+    color:#ffffff;
+    font-size:22px;
+}
+.form_area input[type=submit],
+input[type=button]
+{
+    border:none;
+    height:40px;
+    outline:none;
+    color:#ffffff;
+    font-size:15px;
+    background-color:#000033;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:20px;
+    text-decoration:none;
+}
+.form_area input[type=submit]:hover{
+    background-color:#99bbff;
+    color:black;
+}
+.form_area a{
+    color:#ffffff;
+    font-size:16px;
+    font-weight:bold;
+    text-decoration:none;
+}
+.form_area p{
+    margin:0;
+    padding:0;
+    color:#ffffff;
+    font-size:17px;
+    text-align:center;
+}
+.form_area img
+{
+    margin-left:50px;
+    height:100px;
+    width:320px;
+    padding:10px;
+}
+</style>
+    <div class="form_area">
+        <img src="static/logoc.jpg"><br><br>
+        <h3>LOGIN</h3>
+        <form action="/login" method="POST">
+            <input type="text" name="" placeholder="username"></br>
+            <input type="password" name="" placeholder="password"></br>
+            <input type="submit" name="submit" value="LOGIN" onclick="/notification.html"></br>
+            <a href="">Forgot Password</a><br><br><br>
+            </form>
+            <a href="/reg1"><input style="width:215px" type="button" value="SIGN UP as POLICE"></a>
+            <a href="/reg2"><input style="width:215px" type="button" value="SIGN UP as COMPANY"></a>
+            <a href="/admin_home"><input style="width:215px" type="button" value="ADMIN"></a>
+            <a href="/company_home"><input style="width:215px" type="button" value="CRIMINAL"></a>
+            <a href="/police_home"><input style="width:215px" type="button" value="POLICE"></a></br>
+    </div>
