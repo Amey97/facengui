@@ -85,7 +85,7 @@ h5
 				<option value="r4">Nashik</option>
 			</select><br><br>
 			<input type="text" name="address_ps" placeholder="Address of Police Station:" required><br><br>
-			<input type="text" name="ps_phone1" placeholder="Contact Number:" required><br><br>
+			<input type="text" name="ps_phone1" placeholder="Contact Number:" pattern="[0-9]{10}" required><br><br>
 		</fieldset>
 		<br><br>
 		<fieldset>
@@ -95,12 +95,26 @@ h5
 			<input type="text" name="head_aadhar" placeholder="Aadhar Number(Head Officer): " pattern="[0-9]{12}" required><br><br>
 			<input type="text" name="head_pan" placeholder="PAN Number:" required><br><br>
 			<input type="email" name="head_email" placeholder="Email ID:" required><br><br>
-			<input type="text" name="head_mob_no" placeholder="Mobile Number:" required><br><br>
+			<input type="text" name="head_mob_no" placeholder="Mobile Number:" pattern="[0-9]{10}" required><br><br>
 			<input type="text" name="head_user_id1" placeholder="username" required><br><br>
-			<input type="password" name="head_pass1" placeholder="password" required><br><br>
-			<input type="password" name="head_pass21" placeholder="confirm password" required>
+			<input type="password" id="password" name="head_pass1" placeholder="password" required><br><br>
+			<input type="password" id="confirm_password" name="head_pass21" placeholder="confirm password" onkeyup='check();' required>
+			<br>
+			<span id='message'></span>
 		</fieldset><br><br>
 		<button type="submit" id="submit">Submit</button>
 		<button type="cancel" id="cancel">Cancel</button>
 		<br><br><br>
 	</form>
+<script>
+	var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+</script>

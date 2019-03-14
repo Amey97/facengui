@@ -4,25 +4,81 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        form{
-            margin-left:400px;
-            font-size:15px;
+        .form_area{
+            margin-left:350px;
+            border: 1px solid blue;
+            width:600px;
+        }
+        .form_area input[type=file]{
+            margin-left:100px;
+            height:30px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area input[type=text],
+        .form_area input[type=date],
+        .form_area input[type=password],
+        .form_area select{
+            margin-left:100px;
+            height:50px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area label{
+            margin-left:50px;
+            height:50px;
+            width:50px;
+            color:#000033;
+        }
+        .form_area fieldset{
+	        width:550px;
+        }
+        .form_area legend{
+	        font-size:20px;
+	        font-weight:bold;
+	        color:#000033;
+        }
+        .form_area button
+        {
+	        border:none;
+            height:37px;
+            outline:none;
+            color:#ffffff;
+            font-size:18px;
+            background-color:#000033;
+            cursor:pointer;
+            font-weight:bold;
+            border-radius:20px;
+            text-decoration:none;
+            margin-left:120px;
+            width:300px;
+        }
+        h1{
+            text-align:center;
+            color:#000033;
         }
     </style>
 </head>
 <body>
-    <form action="{{ url_for('upd')}}" method="post">
+    <form class="form_area" action="{{ url_for('upd')}}" method="post">
         {% for row in rows %}
-        ID: <input type="text" value="{{row['id']}}" name="id">
-        Name: <input type="text" value="{{row['name']}}" name="name">
-        Date of Birth: <input type="text" value="{{row['dob']}}" name="dob">
-        Gender: <input type="text" value="{{row['gender']}}" name="gender">
-        Contact Number: <input type="text" value="{{row['contact']}}" name="contact">
-        Address: <input type="text" value="{{row['address']}}" name="address">
-        Aadhar Number: <input type="text" value="{{row['aadhar']}}" name="aadhar">
-        Crime: <input type="text" value="{{row['crime']}}" name="crime">
-        Act: <input type="text" value="{{row['act']}}" name="act">
+        ID: <input type="text" value="{{row['id']}}" name="id"><br>
+        Name: <input type="text" value="{{row['name']}}" name="name"><br>
+        Date of Birth: <input type="text" value="{{row['dob']}}" name="dob"><br>
+        Gender: <input type="text" value="{{row['gender']}}" name="gender"><br>
+        Contact Number: <input type="text" value="{{row['contact']}}" name="contact"><br>
+        Address: <input type="text" value="{{row['address']}}" name="address"><br>
+        Aadhar Number: <input type="text" value="{{row['aadhar']}}" name="aadhar"><br>
+        Crime: <input type="text" value="{{row['crime']}}" name="crime"><br>
+        Act: <input type="text" value="{{row['act']}}" name="act"><br>
         <button type="submit" >Update</button>
+        <br><br>
         {% endfor %}
     </form>
 </body>

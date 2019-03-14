@@ -5,11 +5,10 @@ import time
 from db import Database
 from face import Face
 import db as dbHandler
-from md5 import md5_to_hex
-from md5 import md5
+from md5 import test
 import sqlite3
-import math
 
+import json
 app = Flask(__name__)
 
 #1.configuration settings
@@ -37,7 +36,9 @@ def login():
    if request.method == 'POST':
       username = request.form['username']
       password = request.form['password']
-      print (username)
+      demo = test(str(password))
+      print (demo)
+      print (password)
       #password.encode("ascii")
       #demo = [input(password).encode("ascii")]
       #print (demo)
@@ -48,7 +49,7 @@ def login():
       con = sqlite3.connect("database.db")
       con.row_factory = sqlite3.Row
       cur = con.cursor()
-      cur.execute("SELECT * from login WHERE username=? AND password=?", (username, password))
+      cur.execute("SELECT * from login WHERE username=? AND password=?", (username, demo))
       results = cur.fetchall()
       for row in results:
          type = row[2]
@@ -80,7 +81,10 @@ def addrec():
         head_user_id1 = request.form['head_user_id1']
         head_pass1 = request.form['head_pass1']
         head_pass21 = request.form['head_pass21']
-        app.db.insertUser(name_of_police_stn, police_stn_no, region1, address_ps, ps_phone1, head_officer, head_id, head_aadhar, head_pan, head_email, head_mob_no, head_user_id1, head_pass1, head_pass21)
+        pass_police = test(str(head_pass1))
+        print (pass_police)
+        #print (head_pan)
+        app.db.insertUser(name_of_police_stn, police_stn_no, region1, address_ps, ps_phone1, head_officer, head_id, head_aadhar, head_pan, head_email, head_mob_no, head_user_id1, pass_police, head_pass21)
 
         return render_template('home.html')
     else:
@@ -117,7 +121,9 @@ def addrec1():
         head_user_id = request.form['head_user_id']
         head_pass = request.form['head_pass']
         head_pass2 = request.form['head_pass2']
-        app.db.insertUser1('INSERT INTO company_reg (name_of_comp, reg_no, region, address_comp,ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',name_of_comp, reg_no, region, address_comp, ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2)
+        pass_comp = test(str(head_pass))
+        print (pass_comp)
+        app.db.insertUser1('INSERT INTO company_reg (name_of_comp, reg_no, region, address_comp,ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',name_of_comp, reg_no, region, address_comp, ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, pass_comp, head_pass2)
         #app.db.insertUser(name_of_comp, reg_no, region, address_comp, ps_phone, hr_name, emp_id, hr_aadhar, hr_pan, hr_email, hr_mob_no, head_user_id, head_pass, head_pass2)
         return render_template('home.html')
     else:
@@ -231,8 +237,16 @@ def train():
 
             # get name in form data
             name = request.form['name']
+            contact = request.form['contact']
+            address = request.form['address']
+            aadhar = request.form['aadhar']
+            crime = request.form['crime']
+            act = request.form['act']
+            gender = request.form['gender']
+            dob = request.form['dob']
 
-            print("Information of that face", name)
+
+            #print("Information of that face", dob)
 
             print("File is allowed and will be saved in ", app.config['storage'])
             filename = secure_filename(file.filename)
@@ -242,7 +256,7 @@ def train():
 
             # save to our sqlite database.db
             created = int(time.time())
-            user_id = app.db.insert('INSERT INTO users(name, created) values(?,?)', [name, created])
+            user_id = app.db.insert('INSERT INTO users(name, contact,address,aadhar,crime,act,gender,dob, created) values(?,?,?,?,?,?,?,?,?)', [name, contact, address,aadhar,crime,act,gender,dob, created])
 
             if user_id:
 
@@ -284,8 +298,29 @@ def user_profile(user_id):
         delete_user_by_id(user_id)
         return success_handle(json.dumps({"deleted": True}))
 
+
+#criminal profile
+@app.route('/view/<id>', methods=['POST', 'GET'])
+def view(id):
+    print (id)
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * from users WHERE id=?", [id])
+    results = cur.fetchall()
+    con.commit()
+    return render_template('criminal_profile.html', rows=results)
+
+
+def get_users_data(user_id):
+    results = app.db.select('SELECT * from users WHERE id=?',[user_id])
+
+    for row in results:
+         print(row)
+    return results
+
 # router for recognize a unknown face
-@app.route('/api/recognize', methods=['POST'])
+@app.route('/api/recognize', methods=['POST','GET'])
 def recognize():
     if 'file' not in request.files:
         return error_handle("Image is required")
@@ -302,11 +337,20 @@ def recognize():
             file.save(file_path)
 
             user_id = app.face.recognize(filename)
-
+            get_users_data(user_id)
+            #result = app.db.select('SELECT * from users WHERE id=?',[user_id])
+            #print (result)
             if user_id:
                 user = get_user_by_id(user_id)
-                message = {"message": "Hey we found {0} matched with your face image".format(user["name"]),
+                print(user)
+                print(type(user))
+                message = {"message": "yach nav".format(user["name"]),
                            "user": user}
+
+                #print (user)
+                #message = {"message": "Hey we found {0} matched with your face image",
+                #           "user": user}
+                #view(user_id)
                 return success_handle(json.dumps(message))
             else:
 
@@ -348,7 +392,7 @@ def police_update():
     return render_template('police_update.html')
 
 # company user window
-@app.route('/company_home')
+@app.route('/company_home', methods=['GET','POST'])
 def company_home():
     return render_template('company_home.html')
 
@@ -518,17 +562,25 @@ def pr(head_user_id1):
     con.commit()
     return admin_home()
 
-#criminal profile
-@app.route('/view/<id>', methods=['POST', 'GET'])
-def view(id):
-    print (id)
-    con = sqlite3.connect("database.db")
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-    cur.execute("SELECT * from users WHERE id=?", [id])
-    results = cur.fetchall()
-    con.commit()
-    return render_template('criminal_profile.html', rows=results)
+
+#company home criminal profile
+@ app.route('/crimesearch', methods=['POST', 'GET'])
+def crimesearch():
+        if request.method == 'POST':
+            name = request.form['name']
+            print (name)
+            con = sqlite3.connect("database.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            print ("conn")
+            cur.execute("SELECT * from users WHERE name=?", [name])
+            print ("query")
+            results = cur.fetchall()
+            return render_template('criminal_profile.html', rows=results)
+        else:
+            print("error")
+            return render_template('police_home.html')
+
 
 #@app.route('/cripro', methods=['POST', 'GET'])
 #def cripro():

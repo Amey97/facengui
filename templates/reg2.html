@@ -31,6 +31,7 @@ h5
 }
 .form_area input[type=text],
 .form_area input[type=password],
+.form_area input[type=email],
 .form_area select
 {
 	margin-left:50px;
@@ -74,31 +75,44 @@ h5
 	<form class="form_area" action="{{ url_for('addrec1')}}" method="post">
 		<fieldset>
 			<legend>Company Details</legend><br>
-			<input type="text" name="name_of_comp" placeholder="Name of Company"><br><br>
-			<input type="text" name="unique_reg_no" placeholder="Company Registration Number"><br><br>
-			<select name="region" placeholder="Region">
+			<input type="text" name="name_of_comp" placeholder="Name of Company" required><br><br>
+			<input type="text" name="unique_reg_no" placeholder="Company Registration Number" required><br><br>
+			<select name="region" placeholder="Region" required>
 				<option value="r1">Mumbai</option>
 				<option value="r2">Pune</option>
 				<option value="r3">Thane</option>
 				<option value="r4">Nashik</option>
 			</select><br><br>
-			<input type="text" name="address_comp" placeholder="Address of Company"><br><br>
-			<input type="text" name="ps_phone" placeholder="Contact Number"><br><br>
+			<input type="text" name="address_comp" placeholder="Address of Company" required><br><br>
+			<input type="text" name="ps_phone" placeholder="Contact Number" pattern="[0-9]{10}" required><br><br>
 		</fieldset>
 		<br><br>
 		<fieldset>
 			<legend>HR Details</legend><br>
-			<input type="text" name="hr_name" placeholder="Name of HR"><br><br>
-			<input type="text" name="emp_id" placeholder="EMP_ID(HR):"><br><br>
-			<input type="text" name="hr_aadhar" placeholder="Aadhar Number(HR):"><br><br>
-			<input type="text" name="hr_pan" placeholder="PAN Number:"><br><br>
-			<input type="text" name="hr_email" placeholder="Email ID:"><br><br>
-			<input type="text" name="hr_mob_no" placeholder="Mobile Number:"><br><br>
-			<input type="text" name="head_user_id" placeholder="username"><br><br>
-			<input type="password" name="head_pass" placeholder="password"><br><br>
-			<input type="password" name="head_pass2" placeholder="confirm password">
+			<input type="text" name="hr_name" placeholder="Name of HR" required><br><br>
+			<input type="text" name="emp_id" placeholder="EMP_ID(HR):" required><br><br>
+			<input type="text" name="hr_aadhar" placeholder="Aadhar Number(HR):" pattern="[0-9]{12}" required><br><br>
+			<input type="text" name="hr_pan" placeholder="PAN Number:" required><br><br>
+			<input type="email" name="hr_email" placeholder="Email ID:" required><br><br>
+			<input type="text" name="hr_mob_no" placeholder="Mobile Number:" pattern="[0-9]{10}" required><br><br>
+			<input type="text" name="head_user_id" placeholder="username" required><br><br>
+			<input type="password" id="password" name="head_pass" placeholder="password" required><br><br>
+			<input type="password" id="confirm_password" name="head_pass2" placeholder="confirm password" onkeyup='check();' required>
+			<span id='message'></span>
 		</fieldset><br><br>
 		<button type="submit" id="submit">Submit</button>
 		<button type="cancel" id="cancel">Cancel</button>
 		<br><br><br>
 	</form>
+<script>
+	var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+</script>

@@ -12,33 +12,134 @@
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 
+    <style>
+        .form_area{
+            margin-left:350px;
+            border: 1px solid blue;
+            width:600px;
+        }
+        .form_area input[type=file]{
+            margin-left:100px;
+            height:30px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area input[type=text],
+        .form_area input[type=date],
+        .form_area input[type=password],
+        .form_area select{
+            margin-left:100px;
+            height:50px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area label{
+            margin-left:50px;
+            height:50px;
+            width:50px;
+            color:#000033;
+        }
+        .form_area fieldset{
+	        width:550px;
+        }
+        .form_area legend{
+	        font-size:20px;
+	        font-weight:bold;
+	        color:#000033;
+        }
+        .form_area button
+        {
+	        border:none;
+            height:37px;
+            outline:none;
+            color:#ffffff;
+            font-size:18px;
+            background-color:#000033;
+            cursor:pointer;
+            font-weight:bold;
+            border-radius:20px;
+            text-decoration:none;
+            margin-left:120px;
+            width:300px;
+        }
+        h1{
+            text-align:center;
+            color:#000033;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <br><br>
-    <form method="post" id="train">
+<div id="train-content">
+    <form class="form_area" method="post" id="train">
+        <br><br><br>
             <div class="message">
 
             </div>
-            <p class="description">Pre-training our service. Upload an image contain the face and give it full name for
-                recognize later</p>
             <div class="form-item">
-                <label for="input-file">Face image</label>
-                <input type="file" name="file" id="input-file" accept="image/*"/>
+                
+                <input type="file" name="file" id="input-file" accept="image/*" required/>
             </div>
             <div class="form-item">
-                <label>Full name</label>
-                <input id="name-field" name="name" value="" type="text" placeholder="Full name"/>
+                
+                <input id="name-field" name="name" value="" type="text" placeholder="Full name" required/><br>
+
+                
+                <input id="contact-field" name="contact" value="" type="text" placeholder="Contact Number" pattern="[0-9]{10}" required/><br>
+
+               
+                <input id="address-field" name="address" value="" type="text" placeholder="Address" required/><br>
+
+                
+                <input id="aadhar-field" name="aadhar" value="" type="text" placeholder="aadhar" pattern="[0-9]{12}" required/><br>
+
+                
+                <input id="crime-field" name="crime" value="" type="text" placeholder="crime" required/><br>
+
+                
+                <input id="act-field" name="act" value="" type="text" placeholder="act" required/><br>
+
+                <select id="gender-field" name="gender" placeholder="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br>
+
+                <input id="dob-field" type="date" name="dob" placeholder="Date of Birth" onkeyup='checkDOB();'required><br>
+                <span id='message'></span>
+                <br><br><br>
+
+
             </div>
             <div class="form-action">
                 <button type="submit">Begin train it</button>
             </div>
+	    <br><br><br>
         </form>
 
     <br><br><br><br><br>
 </div>
+</div>
+    <script>
+     var checkDOB = function() {
+        var dateString = document.getElementById('dob-field').value;
+        var myDate = new Date(dateString);
+        var today = new Date();
+        if ( myDate > today ) {
+            document.getElementById('message').innerHTML = 'enter valid date';
+        }
+    }
+</script>
+
 </body>
 </html>
+
 
 {% endblock %}

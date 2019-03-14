@@ -1,6 +1,14 @@
 var train_data = {
     name: "",
-    file: null
+    contact: "",
+    file: null,
+    contact: "",
+    address: "",
+    aadhar: "",
+    crime: "",
+    act: "",
+    gender: "",
+    dob: ""
 };
 
 var recognize_data = {
@@ -70,6 +78,50 @@ $(document).ready(function(){
 
     });
 
+    $('#contact-field').on('change', function(event){
+
+        train_data.contact = _.get(event, 'target.value', '');
+
+    });
+
+
+    $('#address-field').on('change', function(event){
+
+        train_data.address = _.get(event, 'target.value', '');
+
+    });
+
+    $('#aadhar-field').on('change', function(event){
+
+        train_data.aadhar = _.get(event, 'target.value', '');
+
+    });
+
+    $('#crime-field').on('change', function(event){
+
+        train_data.crime = _.get(event, 'target.value', '');
+
+    });
+
+    $('#act-field').on('change', function(event){
+
+        train_data.act = _.get(event, 'target.value', '');
+
+    });
+
+    $('#gender-field').on('change', function(event){
+
+        train_data.gender = _.get(event, 'target.value', '');
+
+    });
+
+    $('#dob-field').on('change', function(event){
+
+        train_data.dob = _.get(event, 'target.value', '');
+
+    });
+
+
     // listen tab item click on
 
     $('.tabs li').on('click', function(e){
@@ -100,19 +152,27 @@ $(document).ready(function(){
 
         message = null;
 
-        if(train_data.name && train_data.file){
+        if(train_data.name && train_data.file || train_data.contact ){
             // do send data to backend api
 
             var train_form_data = new FormData();
 
             train_form_data.append('name', train_data.name);
+            train_form_data.append('contact', train_data.contact);
+            train_form_data.append('address', train_data.address);
+            train_form_data.append('aadhar', train_data.aadhar);
+            train_form_data.append('crime', train_data.crime);
+            train_form_data.append('act', train_data.act);
+            train_form_data.append('gender', train_data.gender);
+            train_form_data.append('dob', train_data.dob);
             train_form_data.append('file', train_data.file);
+
 
             axios.post('/api/train', train_form_data).then(function(response){
 
                 message = {type: 'success', message: 'Training has been done, user with id is: ' + _.get(response, 'data.id')};
 
-                train_data = {name: '', file: null};
+                train_data = {name: '',contact:'',address:'', aadhar:'',crime:'',act:'',gender:'', dob:'', file: null};
                 update();
 
             }).catch(function(error){
@@ -180,5 +240,6 @@ $(document).ready(function(){
 render();
 
 });
+
 
 
