@@ -268,8 +268,7 @@ def test(input=""):
     #import hashlib
     #print `hashlib.md5(input).hexdigest()`
 
-
-"""if __name__ == "__main__":
-    demo = "rekhudiii"
+if __name__ == "__main__":
+    demo = "a123"
     avi=test(demo)
-    print(avi)"""
+    print(avi)

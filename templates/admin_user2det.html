@@ -60,8 +60,6 @@
             <th>Pan No.</th>
             <th>Email Id</th>
             <th>Contact No.</th>
-            <th>User id</th>
-            <th>Password</th>
          </thead>
 
          {% for row in rows %}
@@ -77,8 +75,6 @@
                 <td>{{row["head_pan"]}}</td>
                <td>{{row["head_email"]}}</td>
                <td> {{ row["head_mob_no"]}}</td>
-               <td>{{row['head_user_id1']}}</td>
-                <td> {{ row["head_pass1"]}}</td>
             </tr>
          {% endfor %}
       </table>

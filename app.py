@@ -1,4 +1,4 @@
-from flask import Flask, json, Response, request, render_template
+from flask import Flask, json, Response, request, render_template, flash
 from werkzeug.utils import secure_filename
 from os import path, getcwd
 import time
@@ -33,19 +33,14 @@ def index():
 #login page
 @app.route('/login', methods=['POST','GET'])
 def login():
+
    if request.method == 'POST':
       username = request.form['username']
       password = request.form['password']
       demo = test(str(password))
       print (demo)
       print (password)
-      #password.encode("ascii")
-      #demo = [input(password).encode("ascii")]
-      #print (demo)
-      #for message in demo:
-      #  result = md5_to_hex(md5(message))
-      #print (password)
-      #print (result)
+
       con = sqlite3.connect("database.db")
       con.row_factory = sqlite3.Row
       cur = con.cursor()
@@ -59,8 +54,10 @@ def login():
           return police_home()
       elif type == "company":
          return company_home()
+      flash("Login Successfully!:")
+
    else:
-      print("error")
+      flash("Incorrect UserId or Password!")
       return render_template('home.html')
 
 #2 police_db
@@ -244,10 +241,7 @@ def train():
             act = request.form['act']
             gender = request.form['gender']
             dob = request.form['dob']
-
-
             #print("Information of that face", dob)
-
             print("File is allowed and will be saved in ", app.config['storage'])
             filename = secure_filename(file.filename)
             trained_storage = path.join(app.config['storage'], 'trained')
@@ -344,12 +338,12 @@ def recognize():
                 user = get_user_by_id(user_id)
                 print(user)
                 print(type(user))
-                message = {"message": "yach nav".format(user["name"]),
-                           "user": user}
+                #message = {"message": "yach nav".format(user["name"]),
+                           #"user": user}
 
                 #print (user)
-                #message = {"message": "Hey we found {0} matched with your face image",
-                #           "user": user}
+                message = {"message": "Hey we found {0} matched with your face image",
+                           "user": user}
                 #view(user_id)
                 return success_handle(json.dumps(message))
             else:
@@ -480,7 +474,7 @@ def upd():
         crime = request.form['crime']
         act = request.form['act']
         print ("b")
-        cur.execute("UPDATE users set name=?, dob=?  WHERE id=?", [name, dob, id])
+        cur.execute("UPDATE users set name=?, dob=?, gender=?, contact=?, address=?, aadhar=?, crime=?, act=?  WHERE id=?", [name, dob, gender,contact, address, aadhar, crime, act, id])
         print ("k")
         con.commit()
         return police_home()
@@ -573,10 +567,11 @@ def crimesearch():
             con.row_factory = sqlite3.Row
             cur = con.cursor()
             print ("conn")
-            cur.execute("SELECT * from users WHERE name=?", [name])
+            #cur.execute("SELECT * from users WHERE name=?", [name])
+            cur.execute("select users.id,users.name, users.aadhar,users.address,users.contact,users.crime,users.gender, users.act , faces.filename from users,faces where users.id = faces.user_id AND users.name=?", [name])
             print ("query")
             results = cur.fetchall()
-            return render_template('criminal_profile.html', rows=results)
+            return render_template('c_profile.html', rows=results)
         else:
             print("error")
             return render_template('police_home.html')

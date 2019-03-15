@@ -97,7 +97,7 @@ input[type=button]
         </form>
             <a href="/reg1"><input style="width:215px" type="button" value="SIGN UP as POLICE"></a>
             <a href="/reg2"><input style="width:215px" type="button" value="SIGN UP as COMPANY"></a>
-            <a href="/admin_home"><input style="width:215px" type="button" value="ADMIN"></a>
-            <a href="/company_home"><input style="width:215px" type="button" value="CRIMINAL"></a>
-            <a href="/police_home"><input style="width:215px" type="button" value="POLICE"></a></br>
+            {% if error %}
+            <p class="error"><strong>Error:</strong></p>
+            {% endif %}
     </div>

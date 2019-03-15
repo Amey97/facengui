@@ -170,7 +170,7 @@ $(document).ready(function(){
 
             axios.post('/api/train', train_form_data).then(function(response){
 
-                message = {type: 'success', message: 'Training has been done, user with id is: ' + _.get(response, 'data.id')};
+                message = {type: 'success', message: 'Record has been added.: ' + _.get(response, 'data.id')};
 
                 train_data = {name: '',contact:'',address:'', aadhar:'',crime:'',act:'',gender:'', dob:'', file: null};
                 update();
@@ -217,7 +217,7 @@ $(document).ready(function(){
 
             console.log("We found a user matched with your face image is", response.data);
 
-            message = {type: 'success', message: 'We found a user matched with your face image is: '+ response.data.user.name};
+            message = {type: 'success', message: 'Name of Criminal: '+ response.data.user.name};
 
             recognize_data = {file: null};
             update();

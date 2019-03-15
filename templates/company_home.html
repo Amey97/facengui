@@ -9,30 +9,69 @@
     <script type="text/javascript" src="{{ url_for('static', filename='axios.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+    <style>
+        .form_area{
+            margin-left:350px;
+            width:700px;
+        }
+        .form_area input[type=text]
+        {
+            height:50px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-bottom:1px solid #002266;
+            border-radius:5px;
+        }
+        .form_area button
+        {
+	        border:none;
+            height:37px;
+            outline:none;
+            color:#ffffff;
+            font-size:18px;
+            background-color:#000033;
+            cursor:pointer;
+            font-weight:bold;
+            border-radius:20px;
+            text-decoration:none;
+            width:200px;
+        }
+        .form_area p{
+            font-size:30px;
+            font-weight:bold;
+        }
+        .form_area input[type=file]{
+            height:30px;
+            width:350px;
+            color:#000033;
+            border:black;
+            border-radius:5px;
+        }
+    </style>
 </head>
 <body>
 
-
-
 <div style="margin-left:40px; margin-top:100px;" class="container" >
+        <form method="post" id="recognize" class="form_area">
 
-        <form method="post" id="recognize">
-            <p style="font-size:30px;" class="description">Upload Image</p><br>
             <div class="form-item">
-
+                <p class="description">Upload Image</p>
                 <input type="file" name="file" id="recognize-input-file" accept="image/*"/>
             </div>
-
+            <br><br>
             <div class="form-action">
-                <button type="submit" style="font-size:30px;">Recognize it</button>
+                <button type="submit">Submit</button>
             </div>
             <div class="message">
-
             </div>
         </form>
+        <br>
         <form class="form_area" action="{{ url_for('crimesearch')}}" method="post" ><br><br>
-            <input type="text" name="name" placeholder="id">
-            <button type="submit" id="submit">search</button>
+            <p>Search Detail Information</p>
+            <input type="text" name="name" placeholder="Name of criminal">
+            <br><br>
+            <button type="submit" id="submit">Search</button>
         </form>
 
 </div>

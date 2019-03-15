@@ -15,7 +15,6 @@
     <style>
         .form_area{
             margin-left:350px;
-            border: 1px solid blue;
             width:600px;
         }
         .form_area input[type=file]{
@@ -24,7 +23,6 @@
             width:350px;
             color:#000033;
             border:black;
-            border-bottom:1px solid #002266;
             border-radius:5px;
         }
         .form_area input[type=text],
@@ -72,6 +70,10 @@
             text-align:center;
             color:#000033;
         }
+        .form_area p{
+            text-align:center;
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +83,7 @@
 <div id="train-content">
     <form class="form_area" method="post" id="train">
         <br><br><br>
+            <p>Add Criminal Record</p><br><br>
             <div class="message">
 
             </div>
@@ -132,8 +135,9 @@
         var dateString = document.getElementById('dob-field').value;
         var myDate = new Date(dateString);
         var today = new Date();
+        today.setHours(0,0,0,0);
         if ( myDate > today ) {
-            document.getElementById('message').innerHTML = 'enter valid date';
+            alert("Working");
         }
     }
 </script>

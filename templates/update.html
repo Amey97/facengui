@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+{% extends 'layout_police.html' %}
+
+{% block content %}
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +10,6 @@
     <style>
         .form_area{
             margin-left:350px;
-            border: 1px solid blue;
             width:600px;
         }
         .form_area input[type=file]{
@@ -22,7 +25,6 @@
         .form_area input[type=date],
         .form_area input[type=password],
         .form_area select{
-            margin-left:100px;
             height:50px;
             width:350px;
             color:#000033;
@@ -63,23 +65,35 @@
             text-align:center;
             color:#000033;
         }
+
+        .form_area p{
+            text-align:center;
+            font-size:30px;
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
+    <br><br><br>
     <form class="form_area" action="{{ url_for('upd')}}" method="post">
+        <p>Update Record</p>
         {% for row in rows %}
-        ID: <input type="text" value="{{row['id']}}" name="id"><br>
-        Name: <input type="text" value="{{row['name']}}" name="name"><br>
-        Date of Birth: <input type="text" value="{{row['dob']}}" name="dob"><br>
-        Gender: <input type="text" value="{{row['gender']}}" name="gender"><br>
-        Contact Number: <input type="text" value="{{row['contact']}}" name="contact"><br>
-        Address: <input type="text" value="{{row['address']}}" name="address"><br>
-        Aadhar Number: <input type="text" value="{{row['aadhar']}}" name="aadhar"><br>
-        Crime: <input type="text" value="{{row['crime']}}" name="crime"><br>
-        Act: <input type="text" value="{{row['act']}}" name="act"><br>
+        <label>ID:</label> <input type="text" value="{{row['id']}}" name="id"><br>
+        <label>Name:</label> <input type="text" value="{{row['name']}}" name="name"><br>
+        <label>Date of Birth: </label><input type="text" value="{{row['dob']}}" name="dob"><br>
+        <label>Gender: </label>
+        <input type="text" value="{{row['gender']}}" name="gender"><br>
+        <label>Contact Number: </label><input type="text" value="{{row['contact']}}" name="contact"><br>
+        <label>Address:</label> <input type="text" value="{{row['address']}}" name="address"><br>
+        <label>Aadhar Number: </label><input type="text" value="{{row['aadhar']}}" name="aadhar"><br>
+        <label>Crime:</label> <input type="text" value="{{row['crime']}}" name="crime"><br>
+        <label>Act:</label> <input type="text" value="{{row['act']}}" name="act"><br><br>
         <button type="submit" >Update</button>
         <br><br>
         {% endfor %}
     </form>
 </body>
 </html>
+
+
+{% endblock %}

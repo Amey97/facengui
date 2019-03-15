@@ -71,19 +71,28 @@ h5
 		<h1>Criminal Face Detection and Data Extraction</h1>
 		<h5>-----Developed by Rekha, Amey & Dipali-----</h5>
 	</div><br>
-	<h3>COMPANY USER REGISTRATION</h3>
+	<h3>ORGANIZATION USER REGISTRATION</h3>
 	<form class="form_area" action="{{ url_for('addrec1')}}" method="post">
 		<fieldset>
-			<legend>Company Details</legend><br>
-			<input type="text" name="name_of_comp" placeholder="Name of Company" required><br><br>
-			<input type="text" name="unique_reg_no" placeholder="Company Registration Number" required><br><br>
+			<legend>Organization Details</legend><br>
+			<input type="text" name="name_of_comp" placeholder="Name of organization" required><br><br>
+			<input type="text" name="unique_reg_no" placeholder="Organization Registration Number" required><br><br>
 			<select name="region" placeholder="Region" required>
 				<option value="r1">Mumbai</option>
 				<option value="r2">Pune</option>
 				<option value="r3">Thane</option>
 				<option value="r4">Nashik</option>
+				<option value="r5">Nagpur</option>
+				<option value="r6">Chennai</option>
+				<option value="r7">Maisoor</option>
+				<option value="r8">Hydrabad</option>
+				<option value="r9">Bangalore</option>
+				<option value="r10">Kolhapur</option>
+				<option value="r11">Noida</option>
+				<option value="r12">Delhi</option>
+
 			</select><br><br>
-			<input type="text" name="address_comp" placeholder="Address of Company" required><br><br>
+			<input type="text" name="address_comp" placeholder="Address of Organization" required><br><br>
 			<input type="text" name="ps_phone" placeholder="Contact Number" pattern="[0-9]{10}" required><br><br>
 		</fieldset>
 		<br><br>
